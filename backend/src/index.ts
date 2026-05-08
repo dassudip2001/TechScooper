@@ -5,6 +5,8 @@ import morgan from "morgan";
 import { connectDB } from "./lib/mongo";
 import { prisma } from "./lib/prisma";
 
+import userRoute from "./routes/userRoute";
+
 const app = express();
 
 // connect mongodb
@@ -19,7 +21,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan("dev"));
 
-// chat
-// app.use("/api/chat", chatRoutes);
+// user routes
+app.use("/api/v1", userRoute);
 
 export default app;
