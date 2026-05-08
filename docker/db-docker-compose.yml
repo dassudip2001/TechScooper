@@ -1,0 +1,26 @@
+services:
+  db:
+    image: mysql:latest
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cs_database
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+    networks:
+      - cs_network
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+networks:
+  cs_network:
+     external: true
+volumes:
+  db_data:
+    driver: local      
