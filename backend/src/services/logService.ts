@@ -11,7 +11,6 @@ export async function writeLog(data: LogPayload): Promise<void> {
   try {
     await Log.create(data);
   } catch (err) {
-    // Never let a log failure crash the main request
     console.error("[MongoDB Log Error]", err);
   }
 }
