@@ -7,20 +7,26 @@ export type UserT = {
   email: string
 }
 
-export type AuthState = {
+type LoginPayload = {
+  user: UserT
+  token: string
+}
+
+type AuthState = {
   user: UserT | null
   token: string | null
-  login: (data: { user: UserT; token: string }) => void
+
+  login: (data: LoginPayload) => void
   logout: () => void
 }
 
-export const useAuthStore = create(
+export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       user: null,
       token: null,
 
-      login: (data: AuthState) =>
+      login: (data) =>
         set({
           user: data.user,
           token: data.token,

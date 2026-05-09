@@ -3,6 +3,8 @@ import LoginPage from "./pages/login"
 import DahboardPage from "./pages/dashboard"
 import DashboardLayout from "./pages/dashboardLayout"
 import ProtectedRoute from "./pages/ProtectedRoute"
+import ProductPage from "./pages/products"
+import CategoryPage from "./pages/category"
 
 export function App() {
   return (
@@ -10,15 +12,15 @@ export function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route index element={<DahboardPage />} />
+        {/* <Route element={<ProtectedRoute />}> */}
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<DahboardPage />} />
 
-            {/* <Route path="users" element={<Users />} /> */}
+          <Route path="products" element={<ProductPage />} />
 
-            {/* <Route path="settings" element={<Settings />} /> */}
-          </Route>
+          <Route path="category" element={<CategoryPage />} />
         </Route>
+        {/* </Route> */}
       </Routes>
     </BrowserRouter>
   )
