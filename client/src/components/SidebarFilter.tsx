@@ -1,7 +1,7 @@
-import type { Category } from "../data/products";
+import type { CategoryReadT } from "../schema/category.schema";
 
 interface SidebarFilterProps {
-  categories: Category[];
+  categories: CategoryReadT[];
   selectedCategoryId: number | null;
   onSelectCategory: (id: number | null) => void;
 }

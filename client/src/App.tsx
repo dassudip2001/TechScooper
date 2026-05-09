@@ -1,15 +1,30 @@
 import { useState } from 'react';
+import { useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { Header } from './components/Header';
 import { SidebarFilter } from './components/SidebarFilter';
 import { ProductCard } from './components/ProductCard';
-import { mockProducts, mockCategories } from './data/products';
+import { ProductService } from './product.service';
+import { CategoryService } from './category.service';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+  const { data: products = [], isLoading: productsLoading, isError: productsError } = useQuery({
+    queryKey: ['products'],
+    queryFn: () => ProductService.get(),
+  });
+  const { data: categories = [], isLoading: categoriesLoading } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => CategoryService.get(),
+  });
 
-  const filteredProducts = selectedCategory
-    ? mockProducts.filter((p) => p.categoryId === selectedCategory)
-    : mockProducts;
+  const filteredProducts = useMemo(
+    () =>
+      selectedCategory
+        ? products.filter((p) => p.categoryId === selectedCategory)
+        : products,
+    [products, selectedCategory]
+  );
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
@@ -27,7 +42,7 @@ function App() {
 
         <div className="flex flex-col md:flex-row gap-8 items-start">
           <SidebarFilter 
-            categories={mockCategories}
+            categories={categories}
             selectedCategoryId={selectedCategory}
             onSelectCategory={setSelectedCategory}
           />
@@ -48,12 +63,26 @@ function App() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+              {productsLoading || categoriesLoading ? (
+                <p className="text-slate-500 col-span-full">Loading products...</p>
+              ) : null}
+
+              {productsError ? (
+                <p className="text-red-500 col-span-full">Failed to load products. Please try again.</p>
+              ) : null}
+
+              {!productsLoading && !productsError
+                ? filteredProducts.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      categoryName={categories.find((c) => c.id === product.categoryId)?.name}
+                    />
+                  ))
+                : null}
             </div>
 
-            {filteredProducts.length === 0 && (
+            {!productsLoading && !productsError && filteredProducts.length === 0 && (
               <div className="text-center py-24 bg-white rounded-2xl border border-slate-100">
                 <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl">🛋️</span>

@@ -10,7 +10,11 @@ export const createProductSchema = z.object({
 });
 
 export const updateProductSchema = createProductSchema.partial();
+export const readProductSchema = createProductSchema.extend({
+  id: z.number(),
+});
 
 export type CreateProductInput = z.infer<typeof createProductSchema>;
 
 export type UpdateProductInput = z.infer<typeof updateProductSchema>;
+export type ProductReadT = z.infer<typeof readProductSchema>;
