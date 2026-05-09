@@ -3,7 +3,7 @@ import type { CategoryReadT, CategoryWriteT } from "@/schema/category.schema"
 import { API_ENDPOINTS } from "./data"
 
 export interface CategoryServiceT {
-  get: (keyword: string) => Promise<CategoryReadT[]>
+  get: () => Promise<CategoryReadT[]>
   find: (id: number) => Promise<CategoryReadT>
   create: (data: CategoryWriteT) => Promise<string>
   update: (id: number, data: CategoryWriteT) => Promise<string>
@@ -11,12 +11,10 @@ export interface CategoryServiceT {
 }
 
 export const CategoryService: Readonly<CategoryServiceT> = Object.freeze({
-  async get(keyword: string): Promise<CategoryReadT[]> {
+  async get(): Promise<CategoryReadT[]> {
     return axiosInstance
-      .get<CategoryReadT[]>(API_ENDPOINTS.CATEGORY, {
-        params: { q: keyword },
-      })
-      .then((res) => res.data) // Unwrap the Java ApiResponse
+      .get<CategoryReadT[]>(API_ENDPOINTS.CATEGORY)
+      .then((res) => res.data) 
   },
 
   async find(id: number): Promise<CategoryReadT> {

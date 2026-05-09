@@ -17,11 +17,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { CategoryReadT, CategoryWriteT } from "@/schema/category.schema";
 import { CategoryService } from "@/services/category.service";
 
-export enum ModalAction {
-  ADD = "Add",
-  EDIT = "Edit",
-  DELETE = "DELETE",
-}
+export const ModalAction = {
+  ADD: "Add",
+  EDIT: "Edit",
+  DELETE: "DELETE",
+} as const
+
+export type ModalAction = (typeof ModalAction)[keyof typeof ModalAction]
 
 export function AddEditCategory({
   isOpenCategory,

@@ -2,7 +2,6 @@
 
 import * as React from "react"
 
-import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
 import { TeamSwitcher } from "@/components/team-switcher"
@@ -17,10 +16,7 @@ import {
   GalleryVerticalEndIcon,
   AudioLinesIcon,
   TerminalIcon,
-  TerminalSquareIcon,
-  BotIcon,
-  BookOpenIcon,
-  Settings2Icon,
+  
   FrameIcon,
   PieChartIcon,
   MapIcon,
@@ -56,16 +52,19 @@ const data = {
       name: "Dashboard",
       url: "/dashboard",
       icon: <FrameIcon />,
+      activeBasePaths: ["/dashboard"],
     },
     {
       name: "Products",
       url: "products",
       icon: <PieChartIcon />,
+      activeBasePaths: ["products", "/product"],
     },
     {
       name: "Category",
       url: "category",
       icon: <MapIcon />,
+      activeBasePaths: ["/category"],
     },
   ],
 }

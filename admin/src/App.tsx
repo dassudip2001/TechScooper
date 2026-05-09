@@ -5,6 +5,7 @@ import DashboardLayout from "./pages/dashboardLayout"
 import ProtectedRoute from "./pages/ProtectedRoute"
 import ProductPage from "./pages/products"
 import CategoryPage from "./pages/category"
+import AddEditProductPage from "./pages/product/AddEditProductPage"
 
 export function App() {
   return (
@@ -17,6 +18,8 @@ export function App() {
           <Route index element={<DahboardPage />} />
 
           <Route path="products" element={<ProductPage />} />
+          <Route path="product/add" element={<AddEditProductPage />} />
+          <Route path="product/edit/:id" element={<AddEditProductPage />} />
 
           <Route path="category" element={<CategoryPage />} />
         </Route>

@@ -60,12 +60,6 @@ export default function CategoryPage() {
     setIsOpenCategory(true)
   }
 
-  const onDelete = (categoryId: number) => {
-    const shouldDelete = window.confirm("Are you sure you want to delete this category?")
-    if (!shouldDelete) return
-    deleteMutation.mutate(categoryId)
-  }
-
   return (
     <>
       <div className="space-y-4">
@@ -205,7 +199,7 @@ export default function CategoryPage() {
         />
       )}
 
-{isOpenDeleteCategoryModel && selectedCategoryId && (
+      {isOpenDeleteCategoryModel && selectedCategoryId && (
         <DeleteModel
           recordId={selectedCategoryId}
           open={setIsOpenCategoryModel}
