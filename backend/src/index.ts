@@ -10,6 +10,7 @@ import productRouter from "./routes/productRoute";
 import categoryRouter from "./routes/categoryRoute";
 import logRouter from "./routes/logRouter";
 import recommendRouter from "./routes/recommendRouter";
+import fileUploadRouter from "./routes/fileUploadRouter";
 
 const app = express();
 
@@ -35,5 +36,7 @@ app.use("/api/v1/categories", categoryRouter);
 app.use("/api/v1/logs", logRouter);
 // recommend router
 app.use("/api/v1/recommends", recommendRouter);
+// file upload router
+app.use("/api/v1/upload-url", fileUploadRouter);
 
 export default app;
