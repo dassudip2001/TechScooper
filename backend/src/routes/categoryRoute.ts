@@ -9,7 +9,7 @@ import {
 import { authMiddleware } from "../middleware/authMiddleware";
 
 const categoryRouter = Router();
-categoryRouter.get("/", authMiddleware, get);
+categoryRouter.get("/", get);
 categoryRouter.post("/", authMiddleware, create);
 categoryRouter.get("/:id", authMiddleware, find);
 categoryRouter.put("/:id", authMiddleware, put);

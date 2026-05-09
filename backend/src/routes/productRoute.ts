@@ -16,7 +16,7 @@ const productRouter = Router();
 
 // public routes
 productRouter.get("/public", getPublic);
-productRouter.get("/public./:id", findPublic);
+productRouter.get("/public/:id", findPublic);
 // protect all routes with auth and admin rolee.g. only admin can manage products
 productRouter.get("/", authMiddleware, requiredRole("admin"), get);
 productRouter.post(

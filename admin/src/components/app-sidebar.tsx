@@ -52,18 +52,19 @@ const data = {
       url: "/dashboard",
       icon: <FrameIcon />,
       activeBasePaths: ["/dashboard"],
+      exact: true,
     },
     {
       name: "Products",
-      url: "products",
+      url: "/dashboard/products",
       icon: <PieChartIcon />,
-      activeBasePaths: ["products", "/product"],
+      activeBasePaths: ["/dashboard/products", "/dashboard/product"],
     },
     {
       name: "Category",
-      url: "category",
+      url: "/dashboard/category",
       icon: <MapIcon />,
-      activeBasePaths: ["/category"],
+      activeBasePaths: ["/dashboard/category"],
     },
   ],
 }

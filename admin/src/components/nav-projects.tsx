@@ -16,9 +16,16 @@ export function NavProjects({
     url: string
     icon: React.ReactNode
     activeBasePaths?: string[]
+    exact?: boolean
   }[]
 }) {
   const location = useLocation()
+  const pathname = location.pathname
+
+  const matchesPath = (basePath: string, exact?: boolean) =>
+    exact
+      ? pathname === basePath
+      : pathname === basePath || pathname.startsWith(`${basePath}/`)
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
@@ -27,7 +34,7 @@ export function NavProjects({
         {projects.map((item) => {
           const activeBasePaths = item.activeBasePaths ?? [item.url]
           const isActive = activeBasePaths.some((path) =>
-            location.pathname.startsWith(path)
+            matchesPath(path, item.exact)
           )
 
           return (
