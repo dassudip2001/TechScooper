@@ -1,4 +1,5 @@
 import { ShoppingCart, Search, User, Menu } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function Header() {
   return (
@@ -8,12 +9,12 @@ export function Header() {
           <button className="md:hidden p-2 hover:bg-slate-100 rounded-full transition-colors">
             <Menu className="w-5 h-5 text-slate-700" />
           </button>
-          <a href="#" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl leading-none">M</span>
             </div>
             <span className="font-bold text-xl tracking-tight hidden md:block">ModernFurnish</span>
-          </a>
+          </Link>
         </div>
 
         <div className="hidden md:flex items-center flex-1 max-w-md mx-8 relative">

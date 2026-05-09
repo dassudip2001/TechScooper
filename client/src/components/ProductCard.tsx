@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ShoppingBag, Star } from "lucide-react";
 import type { ProductReadT } from "../schema/product.schema";
 import { getImageUrl } from "../cloudfont";
@@ -8,11 +9,13 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, categoryName }: ProductCardProps) {
+  // console.log("..............",product);
+  
   // Mock rating
   const rating = 4.5 + Math.random() * 0.5;
 
   return (
-    <div className="group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full">
+    <Link to={`/product/${product.id}`} className="group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full block">
       <div className="relative aspect-square overflow-hidden bg-slate-50 p-6 flex items-center justify-center">
         {product.imageUrl ? (
           <img
@@ -26,7 +29,13 @@ export function ProductCard({ product, categoryName }: ProductCardProps) {
 
         {/* Hover Action Overlay */}
         <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-          <button className="w-full bg-slate-900/90 backdrop-blur-md text-white font-medium py-3 px-4 rounded-xl flex items-center justify-center gap-2 hover:bg-black transition-colors shadow-lg">
+          <button 
+            onClick={(e) => {
+              e.preventDefault();
+              // Add to cart functionality would go here
+            }}
+            className="w-full bg-slate-900/90 backdrop-blur-md text-white font-medium py-3 px-4 rounded-xl flex items-center justify-center gap-2 hover:bg-black transition-colors shadow-lg"
+          >
             <ShoppingBag className="w-4 h-4" />
             Add to Cart
           </button>
@@ -37,7 +46,7 @@ export function ProductCard({ product, categoryName }: ProductCardProps) {
         <div className="flex justify-between items-start mb-2">
           <div>
             <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase mb-1">
-              {categoryName || "Uncategorized"}
+              {categoryName || product.category?.name || "Uncategorized"}
             </p>
             <h3 className="font-bold text-slate-900 leading-tight">
               {product.name}
@@ -68,6 +77,6 @@ export function ProductCard({ product, categoryName }: ProductCardProps) {
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

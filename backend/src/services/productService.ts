@@ -136,6 +136,8 @@ export async function findPublicProduct(
   userId?: number,
 ): Promise<ServiceResult<object>> {
   try {
+    console.log("data", id, userId);
+
     const product = await prisma.product.findUnique({
       where: { id },
       include: { category: true },

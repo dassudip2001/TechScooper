@@ -3,6 +3,6 @@ import { recommend } from "../controllers/recommendController";
 
 const recommendRouter = Router();
 
-recommendRouter.get("/", recommend);
+recommendRouter.get("/:id", recommend);
 
 export default recommendRouter;

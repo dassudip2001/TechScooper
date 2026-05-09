@@ -12,6 +12,9 @@ export const createProductSchema = z.object({
 export const updateProductSchema = createProductSchema.partial();
 export const readProductSchema = createProductSchema.extend({
   id: z.number(),
+   category:z.object({
+    name:z.string()
+   }).optional()
 });
 
 export type CreateProductInput = z.infer<typeof createProductSchema>;
