@@ -92,137 +92,139 @@ export default function AddEditProductPage() {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{isEdit ? "Edit Product" : "Add Product"}</CardTitle>
-        <CardDescription>
-          {isEdit
-            ? "Update product details and image."
-            : "Create a new product with one image upload."}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                placeholder="Enter product name"
-                {...register("name", { required: "Name is required" })}
-              />
-              {errors.name ? (
-                <p className="text-sm text-destructive">
-                  {errors.name.message}
-                </p>
-              ) : null}
-            </div>
+    <>
+      <Card>
+        <CardHeader>
+          <CardTitle>{isEdit ? "Edit Product" : "Add Product"}</CardTitle>
+          <CardDescription>
+            {isEdit
+              ? "Update product details and image."
+              : "Create a new product with one image upload."}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  placeholder="Enter product name"
+                  {...register("name", { required: "Name is required" })}
+                />
+                {errors.name ? (
+                  <p className="text-sm text-destructive">
+                    {errors.name.message}
+                  </p>
+                ) : null}
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="price">Price</Label>
-              <Input
-                id="price"
-                type="number"
-                step="0.01"
-                {...register("price", {
-                  required: "Price is required",
-                  valueAsNumber: true,
-                  min: { value: 0.01, message: "Price must be greater than 0" },
-                })}
-              />
-              {errors.price ? (
-                <p className="text-sm text-destructive">
-                  {errors.price.message}
-                </p>
-              ) : null}
-            </div>
+              <div className="space-y-2">
+                <Label htmlFor="price">Price</Label>
+                <Input
+                  id="price"
+                  type="number"
+                  step="0.01"
+                  {...register("price", {
+                    required: "Price is required",
+                    valueAsNumber: true,
+                    min: { value: 0.01, message: "Price must be greater than 0" },
+                  })}
+                />
+                {errors.price ? (
+                  <p className="text-sm text-destructive">
+                    {errors.price.message}
+                  </p>
+                ) : null}
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="stock">Stock</Label>
-              <Input
-                id="stock"
-                type="number"
-                {...register("stock", {
-                  required: "Stock is required",
-                  valueAsNumber: true,
-                  min: { value: 0, message: "Stock cannot be negative" },
-                })}
-              />
-              {errors.stock ? (
-                <p className="text-sm text-destructive">
-                  {errors.stock.message}
-                </p>
-              ) : null}
-            </div>
+              <div className="space-y-2">
+                <Label htmlFor="stock">Stock</Label>
+                <Input
+                  id="stock"
+                  type="number"
+                  {...register("stock", {
+                    required: "Stock is required",
+                    valueAsNumber: true,
+                    min: { value: 0, message: "Stock cannot be negative" },
+                  })}
+                />
+                {errors.stock ? (
+                  <p className="text-sm text-destructive">
+                    {errors.stock.message}
+                  </p>
+                ) : null}
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="categoryId">Category</Label>
-              <select
-                id="categoryId"
-                className="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm"
-                {...register("categoryId", {
-                  required: "Please select a category",
-                  setValueAs: (value) =>
-                    value === "" ? undefined : Number(value),
-                })}
-              >
-                <option value="">
-                  {categories.length === 0
-                    ? "Loading categories..."
-                    : "Select a category"}
-                </option>
-                {categories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
+              <div className="space-y-2">
+                <Label htmlFor="categoryId">Category</Label>
+                <select
+                  id="categoryId"
+                  className="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm"
+                  {...register("categoryId", {
+                    required: "Please select a category",
+                    setValueAs: (value) =>
+                      value === "" ? undefined : Number(value),
+                  })}
+                >
+                  <option value="">
+                    {categories.length === 0
+                      ? "Loading categories..."
+                      : "Select a category"}
                   </option>
-                ))}
-              </select>
-              {errors.categoryId ? (
-                <p className="text-sm text-destructive">
-                  {errors.categoryId.message}
-                </p>
+                  {categories.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+                {errors.categoryId ? (
+                  <p className="text-sm text-destructive">
+                    {errors.categoryId.message}
+                  </p>
+                ) : null}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="description">Description</Label>
+              <Input id="description" {...register("description")} />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Product Image (single upload)</Label>
+              <UploadFile
+                accept="image/png,image/jpeg,image/webp,image/gif"
+                allowedTypes={["image"]}
+                onUploadComplete={({ key, url }) => {
+                  setValue("imageUrl", key)
+                  setImagePreview(url)
+                }}
+              />
+              {imagePreview ? (
+                <img
+                  src={imagePreview || getImageUrl(product?.imageUrl ?? "")}
+                  alt="Product preview"
+                  className="h-20 w-20 rounded-full object-cover ring-1 ring-border"
+                />
               ) : null}
             </div>
-          </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="description">Description</Label>
-            <Input id="description" {...register("description")} />
-          </div>
-
-          <div className="space-y-2">
-            <Label>Product Image (single upload)</Label>
-            <UploadFile
-              accept="image/png,image/jpeg,image/webp,image/gif"
-              allowedTypes={["image"]}
-              onUploadComplete={({ key, url }) => {
-                setValue("imageUrl", key)
-                setImagePreview(url)
-              }}
-            />
-            {imagePreview ? (
-              <img
-                src={imagePreview || getImageUrl(product?.imageUrl ?? "")}
-                alt="Product preview"
-                className="h-20 w-20 rounded-full object-cover ring-1 ring-border"
-              />
-            ) : null}
-          </div>
-
-          <div className="flex justify-end gap-2 border-t pt-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => navigate("/dashboard/products")}
-            >
-              Cancel
-            </Button>
-            <Button type="submit" disabled={mutation.isPending || isLoading}>
-              {mutation.isPending ? "Saving..." : "Save"}
-            </Button>
-          </div>
-        </form>
-      </CardContent>
-    </Card>
+            <div className="flex justify-end gap-2 border-t pt-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => navigate("/dashboard/products")}
+              >
+                Cancel
+              </Button>
+              <Button type="submit" disabled={mutation.isPending || isLoading}>
+                {mutation.isPending ? "Saving..." : "Save"}
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </>
   )
 }
