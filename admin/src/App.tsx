@@ -12,7 +12,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
-        {/* <Route element={<ProtectedRoute />}> */}
+        <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<DahboardPage />} />
 
@@ -20,7 +20,7 @@ export function App() {
 
           <Route path="category" element={<CategoryPage />} />
         </Route>
-        {/* </Route> */}
+        </Route>
       </Routes>
     </BrowserRouter>
   )

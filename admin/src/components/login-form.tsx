@@ -7,7 +7,9 @@ import { useForm, type SubmitHandler } from "react-hook-form"
 import { useState, useEffect } from "react"
 import { toast } from "sonner"
 import { Loader2 } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useAuthStore } from "@/store/auth"
+import { AuthService } from "@/services/auth.service"
 
 export type LoginRequestT = {
   email: string
@@ -26,8 +28,21 @@ export function LoginForm({
   } = useForm<LoginRequestT>()
   const [loading, setLoading] = useState(false)
 
+  const navigate = useNavigate()
+
+  const login = useAuthStore((state) => state.login)
+
   const onSubmit: SubmitHandler<LoginRequestT> = async (data) => {
-    setLoading(true)
+    try {
+      setLoading(true)
+      const response = await AuthService.login(data)
+      login(response)
+      toast.success("Login successful!")
+      navigate("/dashboard")
+    } catch (error) {
+      setLoading(false)
+      toast.error("Login failed. Please check your credentials and try again.")
+    }
   }
 
   useEffect(() => {
