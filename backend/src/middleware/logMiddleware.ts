@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-// import { writeLog } from "../services/logService";
 import { LogAction } from "../models/Log";
 import { writeLog } from "../services/logService";
 

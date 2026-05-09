@@ -6,6 +6,9 @@ import { connectDB } from "./lib/mongo";
 import { prisma } from "./lib/prisma";
 
 import userRoute from "./routes/userRoute";
+import productRouter from "./routes/productRoute";
+import categoryRouter from "./routes/categoryRoute";
+import logRouter from "./routes/logRouter";
 
 const app = express();
 
@@ -23,5 +26,11 @@ app.use(morgan("dev"));
 
 // user routes
 app.use("/api/v1", userRoute);
+// product router
+app.use("/api/v1/product", productRouter);
+// category router
+app.use("/api/v1/categories", categoryRouter);
+// log router
+app.use("/api/v1/logs", logRouter);
 
 export default app;

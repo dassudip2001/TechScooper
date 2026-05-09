@@ -1,17 +1,12 @@
 import { z } from "zod";
 
 export const createProductSchema = z.object({
-  name: z.string().min(2),
-
+  name: z.string().min(1),
   description: z.string().optional(),
-
   price: z.number().positive(),
-
-  stock: z.int().min(0),
-
+  stock: z.number().int().min(0).default(0),
+  categoryId: z.number().int().optional(),
   imageUrl: z.string().url().optional(),
-
-  categoryId: z.int().optional(),
 });
 
 export const updateProductSchema = createProductSchema.partial();
