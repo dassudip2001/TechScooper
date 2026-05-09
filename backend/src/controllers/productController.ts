@@ -28,7 +28,7 @@ export async function create(req: Request, res: Response): Promise<void> {
   if (!parsed.success) {
     res.status(400).json({
       error: "Validation failed",
-      fields: parsed.error?.errors?.map((e) => ({
+      fields: parsed.error?.issues?.map((e) => ({
         field: e.path.join("."),
         message: e.message,
       })),
@@ -57,7 +57,7 @@ export async function put(req: Request, res: Response): Promise<void> {
   if (!parsed.success) {
     res.status(400).json({
       error: "Validation failed",
-      fields: parsed.error?.errors?.map((e) => ({
+      fields: parsed.error?.issues?.map((e) => ({
         field: e.path.join("."),
         message: e.message,
       })),

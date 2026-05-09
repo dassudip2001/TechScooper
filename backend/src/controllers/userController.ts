@@ -6,9 +6,23 @@ import { ZodError } from "zod";
 export async function register(req: Request, res: Response) {
   try {
     const validatedData = createUserSchema.parse(req.body);
+    if (!validatedData) {
+      res.status(400).json({ error: "Validation failed" });
+      return;
+    }
     await registerUser(validatedData);
     res.status(201).json({ message: "User registered successfully" });
   } catch (err) {
+    if (err instanceof ZodError) {
+      res.status(400).json({
+        error: "Validation failed",
+        fields: err.issues.map((e) => ({
+          field: e.path.join("."),
+          message: e.message,
+        })),
+      });
+      return;
+    }
     res
       .status(400)
       .json({ error: err instanceof Error ? err.message : "Unknown error" });
@@ -18,6 +32,10 @@ export async function register(req: Request, res: Response) {
 export async function login(req: Request, res: Response) {
   try {
     const validatedData = loginUserSchema.parse(req.body);
+    if (!validatedData) {
+      res.status(400).json({ error: "Validation failed" });
+      return;
+    }
     const result = await loginUser(validatedData);
 
     if ("error" in result) {
@@ -30,7 +48,7 @@ export async function login(req: Request, res: Response) {
     if (err instanceof ZodError) {
       res.status(400).json({
         error: "Validation failed",
-        fields: err.errors.map((e) => ({
+        fields: err.issues.map((e) => ({
           field: e.path.join("."),
           message: e.message,
         })),

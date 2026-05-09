@@ -9,6 +9,7 @@ import userRoute from "./routes/userRoute";
 import productRouter from "./routes/productRoute";
 import categoryRouter from "./routes/categoryRoute";
 import logRouter from "./routes/logRouter";
+import recommendRouter from "./routes/recommendRouter";
 
 const app = express();
 
@@ -32,5 +33,7 @@ app.use("/api/v1/product", productRouter);
 app.use("/api/v1/categories", categoryRouter);
 // log router
 app.use("/api/v1/logs", logRouter);
+// recommend router
+app.use("/api/v1/recommends", recommendRouter);
 
 export default app;
