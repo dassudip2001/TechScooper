@@ -7,6 +7,8 @@ const adapter = new PrismaMariaDb({
   user: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
-  connectionLimit: 5,
+  allowPublicKeyRetrieval: true, // ← fixes the RSA error
+  connectionLimit: 10, // ← increase from default 5
+  connectTimeout: 10000,
 });
 export const prisma = new PrismaClient({ adapter });

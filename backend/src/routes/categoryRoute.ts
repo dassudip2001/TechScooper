@@ -11,8 +11,8 @@ import { authMiddleware } from "../middleware/authMiddleware";
 const categoryRouter = Router();
 categoryRouter.get("/", authMiddleware, get);
 categoryRouter.post("/", authMiddleware, create);
-categoryRouter.get("/", authMiddleware, find);
-categoryRouter.put("/", authMiddleware, put);
-categoryRouter.delete("/", authMiddleware, remove);
+categoryRouter.get("/:id", authMiddleware, find);
+categoryRouter.put("/:id", authMiddleware, put);
+categoryRouter.delete("/:id", authMiddleware, remove);
 
 export default categoryRouter;

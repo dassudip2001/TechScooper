@@ -7,8 +7,7 @@ import { s3 } from "../lib/s3";
 
 export async function upload(req: Request, res: Response) {
   try {
-    const { fileName, contentType, type } = await req.body();
-
+    const { fileName, contentType, type } = req.body;
     const ext = fileName.split(".").pop();
     const key = `artwork-uploads/${type}s/${randomUUID()}.${ext}`;
 

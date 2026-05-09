@@ -15,7 +15,7 @@ import fileUploadRouter from "./routes/fileUploadRouter";
 const app = express();
 
 // connect mongodb
-await connectDB();
+// await connectDB();
 // connect prisma
 process.on("SIGINT", async () => {
   await prisma.$disconnect();

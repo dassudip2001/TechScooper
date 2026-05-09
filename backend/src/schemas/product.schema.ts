@@ -6,7 +6,7 @@ export const createProductSchema = z.object({
   price: z.number().positive(),
   stock: z.number().int().min(0).default(0),
   categoryId: z.number().int().optional(),
-  imageUrl: z.string().url().optional(),
+  imageUrl: z.string().optional(),
 });
 
 export const updateProductSchema = createProductSchema.partial();
