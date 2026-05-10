@@ -118,24 +118,30 @@ A full-stack e-commerce platform featuring product catalog, recommendation engin
 
 ## 🛠️ Tech Stack
 
-### Frontend
+### Frontend (Client)
 
-- **React** - UI framework
+- **React 19** - UI framework
 - **TypeScript** - Type safety
 - **Vite** - Build tool
 - **React Router** - Navigation
 - **Tailwind CSS** - Styling
+- **TanStack React Query** - Data fetching & server state
+- **Axios** - HTTP client
+- **React Hook Form** - Form validation
 
 ### Backend
 
 - **Express.js** - API server
 - **Node.js** - Runtime
 - **TypeScript** - Type safety
-- **Prisma ORM** - Database management
+- **Prisma ORM** - SQL Database management
+- **Mongoose** - MongoDB object modeling
+- **Zod** - Schema validation
+- **AWS SDK** - S3 file storage
 
 ### Database
 
-- **MySQL** - Primary database
+- **MySQL / MariaDB** - Primary database
   - User management
   - Products & Categories
   - Orders & Cart
@@ -146,9 +152,12 @@ A full-stack e-commerce platform featuring product catalog, recommendation engin
 
 ### Admin Panel
 
-- **React + TypeScript + Vite**
-- Dashboard for operations
-- Real-time data management
+- **React 19 + TypeScript + Vite**
+- **Tailwind CSS v4** - Styling
+- **shadcn/ui** - UI Components
+- **Zustand** - Global state management
+- **TanStack React Query** - Data fetching & server state
+- Dashboard for operations & real-time data management
 
 ## 📁 Project Structure
 
@@ -261,7 +270,7 @@ npm run dev
 
 ### Recommendations
 
-- `GET /api/recommendations` - Get personalized recommendations
+- `GET /api/recommendations/:productId` - Get personalized recommendations
 
 ### Logs
 
