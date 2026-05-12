@@ -1,7 +1,15 @@
 import { LoginForm } from "@/components/login-form"
 import { GalleryVerticalEnd } from "lucide-react"
+import { useAuthStore } from "@/store/auth"
+import { Navigate } from "react-router-dom"
 
 export default function LoginPage() {
+  const token = useAuthStore((state: any) => state.token)
+
+  if (token) {
+    return <Navigate to="/dashboard" replace />
+  }
+
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-4 sm:p-6 md:p-8 lg:p-12">
       <div className="w-full max-w-md space-y-6 sm:space-y-8">

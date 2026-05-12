@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Activity, Clock, Package, User, Database, LayoutList, ChevronRight } from "lucide-react"
+import { Activity, Clock, Package, User, Database, LayoutList } from "lucide-react"
 import { logService } from "@/services/log.service"
 
 export default function LogsPage() {

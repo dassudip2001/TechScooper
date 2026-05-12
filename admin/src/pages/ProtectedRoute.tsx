@@ -11,11 +11,6 @@ export default function ProtectedRoute() {
     return <Navigate to="/login" replace state={{ from: location }} />
   }
 
-  if(accessToken){
-    setTimeout(()=>{
-      return <Navigate to="/dashboard" replace state={{ from: location }}  />
-    },2000)
-  }
 
   return <Outlet />
 }
