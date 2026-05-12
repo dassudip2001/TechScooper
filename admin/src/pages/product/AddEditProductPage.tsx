@@ -92,7 +92,7 @@ export default function AddEditProductPage() {
   }
 
   return (
-    <>
+    <div className="flex-1 space-y-4">
       <Card>
         <CardHeader>
           <CardTitle>{isEdit ? "Edit Product" : "Add Product"}</CardTitle>
@@ -225,6 +225,6 @@ export default function AddEditProductPage() {
           </form>
         </CardContent>
       </Card>
-    </>
+    </div>
   )
 }

@@ -62,7 +62,7 @@ export default function CategoryPage() {
 
   return (
     <>
-      <div className="space-y-4">
+      <div className="flex-1 space-y-4">
         <Card>
           <CardHeader>
             <div className="flex justify-between items-center">

@@ -54,7 +54,7 @@ export default function ProductPage() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="flex-1 space-y-4">
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between gap-3">

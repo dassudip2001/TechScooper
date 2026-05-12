@@ -30,7 +30,7 @@ export default function DahboardPage() {
   const recentLogs = Array.isArray(logsData) ? logsData.slice(0, 5) : (logsData as any)?.logs?.slice(0, 5) || [];
 
   return (
-    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+    <div className="flex-1 space-y-4">
       <div className="flex items-center justify-between space-y-2">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">Dashboard Overview</h2>
