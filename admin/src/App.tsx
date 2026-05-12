@@ -6,6 +6,7 @@ import ProtectedRoute from "./pages/ProtectedRoute"
 import ProductPage from "./pages/products"
 import CategoryPage from "./pages/category"
 import AddEditProductPage from "./pages/product/AddEditProductPage"
+import LogsPage from "./pages/logs"
 
 export function App() {
   return (
@@ -20,6 +21,7 @@ export function App() {
           <Route path="products" element={<ProductPage />} />
           <Route path="product/add" element={<AddEditProductPage />} />
           <Route path="product/edit/:id" element={<AddEditProductPage />} />
+          <Route path="logs" element={<LogsPage/>}/>
 
           <Route path="category" element={<CategoryPage />} />
         </Route>

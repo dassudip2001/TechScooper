@@ -10,6 +10,7 @@ import { Link, useLocation } from "react-router-dom"
 
 export function NavProjects({
   projects,
+  label
 }: {
   projects: {
     name: string
@@ -18,6 +19,8 @@ export function NavProjects({
     activeBasePaths?: string[]
     exact?: boolean
   }[]
+  label: string
+  ,
 }) {
   const location = useLocation()
   const pathname = location.pathname
@@ -29,7 +32,7 @@ export function NavProjects({
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Projects</SidebarGroupLabel>
+      <SidebarGroupLabel>{label}</SidebarGroupLabel>
       <SidebarMenu>
         {projects.map((item) => {
           const activeBasePaths = item.activeBasePaths ?? [item.url]

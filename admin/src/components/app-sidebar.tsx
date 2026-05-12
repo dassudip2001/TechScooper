@@ -19,6 +19,7 @@ import {
   FrameIcon,
   PieChartIcon,
   MapIcon,
+  FileIcon,
 } from "lucide-react"
 
 // This is sample data.
@@ -67,7 +68,20 @@ const data = {
       activeBasePaths: ["/dashboard/category"],
     },
   ],
+
+  projects2: [
+    {
+      name: "Logs",
+      url: "/dashboard/logs",
+      icon: <FileIcon />,
+      activeBasePaths: ["/dashboard/logs"],
+      exact: true,
+    },
+    
+  ],
 }
+
+
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -77,7 +91,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         {/* <NavMain items={data.navMain} /> */}
-        <NavProjects projects={data.projects} />
+        <NavProjects projects={data.projects} label="Projects" />
+        <NavProjects projects={data.projects2}  label="Settings"/>
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
